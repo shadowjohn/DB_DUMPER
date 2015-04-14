@@ -11,12 +11,12 @@
 
 目前支援資料庫類型：
 
-（✔）MySQL、同MariaDB
-（✔）MSSQL
-（✔）PostgreSQL
-（✔）Oracle
-（ㄨ）SQLite (還沒寫完...~_~)
-
+（✔）MySQL、同MariaDB <br>
+（✔）MSSQL <br>
+（✔）PostgreSQL <br>
+（✔）Oracle <br>
+（ㄨ）SQLite (還沒寫完...~_~) <br>
+<br>
 執行方法：
 　　下載後，執行 run.exe 即可！
 
