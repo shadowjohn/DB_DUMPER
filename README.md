@@ -17,7 +17,14 @@
 （✔）Oracle
 （ㄨ）SQLite (還沒寫完...~_~)
 
+執行方法：
+　　下載後，執行 run.exe 即可！
+
+注意事項：
+　　資料庫儲存後預設是放在 C:\temp\db.data
+
 截圖：
+
 <img src='http://3wa.tw/photo/small.php?w_size=900&compassion=85&file_name=users/shadow/20150414_161846_0.png'>
 
 <img src='http://3wa.tw/photo/small.php?w_size=900&compassion=85&file_name=users/shadow/20150414_161846_1.png'>
