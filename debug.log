@@ -1,0 +1,51 @@
+- 16:06:22.000 INFO: --------------------------------------------------------
+- 16:06:22.000 INFO: Started application
+- 16:06:22.000 INFO: Logging to: C:\Users\john\Desktop\DB_DUMPER\debug.log
+- 16:06:22.000 INFO: Log level = DEBUG4
+- 16:06:22.000 INFO: Starting Mongoose 3.9c web server
+- 16:06:22.000 INFO: WWW directory: C:\Users\john\Desktop\DB_DUMPER\www
+- 16:06:22.000 INFO: Index files: index.html,index.php
+- 16:06:22.000 INFO: CGI interpreter: C:\Users\john\Desktop\DB_DUMPER\php\php-cgi.exe
+- 16:06:22.000 INFO: CGI pattern: **.php$
+- 16:06:22.000 INFO: CGI environment variables set: TMP=C:\Users\john\AppData\Local\Temp\,TEMP=C:\Users\john\AppData\Local\Temp\,TMPDIR=C:\Users\john\AppData\Local\Temp\,SERVER_NAME=127.0.0.1,PHPDESKTOP_VERSION=1.14
+- 16:06:22.000 INFO: Web server url: http://127.0.0.1:53817/
+- 16:06:22.016 INFO: IE version from registry: 9.11.9600.17501
+- 16:06:22.016 DEBUG: FEATURE_XMLHTTP succeeded: 1
+- 16:06:22.016 DEBUG: FEATURE_WINDOW_RESTRICTIONS succeeded: 1
+- 16:06:22.016 DEBUG: FEATURE_WEBOC_POPUPMANAGEMENT succeeded: 1
+- 16:06:22.016 DEBUG: FEATURE_RESTRICT_ACTIVEXINSTALL succeeded: 1
+- 16:06:22.016 DEBUG: FEATURE_RESTRICT_FILEDOWNLOAD succeeded: 1
+- 16:06:22.016 DEBUG: FEATURE_DISABLE_NAVIGATION_SOUNDS succeeded: 1
+- 16:06:22.016 DEBUG: FEATURE_FORCE_ADDR_AND_STATUS succeeded: 1
+- 16:06:22.016 DEBUG: FEATURE_BEHAVIORS succeeded: 1
+- 16:06:22.016 DEBUG: FEATURE_UNC_SAVEDFILECHECK succeeded: 1
+- 16:06:22.016 DEBUG: FEATURE_BLOCK_INPUT_PROMPTS succeeded: 1
+- 16:06:22.016 DEBUG: FEATURE_TABBED_BROWSING succeeded: 1
+- 16:06:22.016 DEBUG: FEATURE_ADDON_MANAGEMENT succeeded: 1
+- 16:06:22.016 DEBUG: GetBrowserWindow(): not found, hwnd = 18039226
+- 16:06:22.016 DEBUG: WindowProc(): event WM_GETMINMAXINFO: could not fetch BrowserWindow
+- 16:06:22.016 DEBUG: BrowserWindow(): parentHandle = 0
+- 16:06:22.016 DEBUG: OleClientSite::QueryInterface(): IServiceProvider
+- 16:06:22.016 DEBUG: OleClientSite::QueryInterface(): IOleInPlaceSite
+- 16:06:22.016 DEBUG: OleClientSite::QueryInterface(): IDispatch
+- 16:06:22.032 DEBUG: GetBrowserWindow(): not found, hwnd = 18039226
+- 16:06:22.032 DEBUG: WindowProc(): event WM_SETFOCUS: could not fetch BrowserWindow
+- 16:06:22.032 DEBUG: OleClientSite::QueryInterface(): IUnknown
+- 16:06:22.032 DEBUG: OleClientSite::QueryInterface(): DWebBrowserEvents2
+- 16:06:22.032 DEBUG: OleClientSite::QueryInterface(): IDocHostUIHandler
+- 16:06:22.032 DEBUG: OleClientSite::QueryInterface(): IDocHostShowUI
+- 16:06:22.063 DEBUG: StoreBrowserWindow(): hwnd = 18039226
+- 16:06:22.234 DEBUG: DISPID_AMBIENT_DLCONTROL
+- 16:06:22.234 DEBUG: DocHostUiHandler::GetOptionKeyPath(): registry path: Software\PHP Desktop\MSIE
+- 16:06:22.250 INFO: GET 200 /
+- 16:06:22.266 INFO: GET 200 /css/normalize.css
+- 16:06:22.266 INFO: GET 200 /inc/jquery-1.8.3.min.js
+- 16:06:22.266 INFO: GET 200 /inc/include.js
+- 16:06:22.266 INFO: GET 200 /inc/php.default-min-min.js
+- 16:06:23.531 INFO: POST 200 /api.php?mode=loadDBLinks
+- 16:06:26.493 DEBUG: RemoveBrowserWindow(): hwnd = 18039226
+- 16:06:26.493 DEBUG: BrowserWindow::CloseBrowserControl()
+- 16:06:27.524 INFO: Stopping Mongoose web server
+- 16:06:27.524 DEBUG: Mongoose webserver stopped immediately
+- 16:06:27.524 INFO: Ended application
+- 16:06:27.524 INFO: --------------------------------------------------------
