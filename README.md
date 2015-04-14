@@ -9,3 +9,15 @@
 版本：V1.0
 版權：GPL & MIT 喜歡就拿去用吧
 
+目前支援資料庫類型：
+
+（✔）MySQL、同MariaDB
+（✔）MSSQL
+（✔）PostgreSQL
+（✔）Oracle
+（ㄨ）SQLite (還沒寫完...~_~)
+
+截圖：
+<img src='http://3wa.tw/photo/small.php?w_size=900&compassion=85&file_name=users/shadow/20150414_161846_0.png'>
+
+<img src='http://3wa.tw/photo/small.php?w_size=900&compassion=85&file_name=users/shadow/20150414_161846_1.png'>
