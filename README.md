@@ -1,10 +1,10 @@
-這是一套用 php-desktop 作為基底寫的資料庫匯出機
+這是一套用 php-desktop 作為基底寫的資料庫資料結構匯出機
 -------------------------------------------------
 此程式是方便工程師提供 Table schema 給 SA，點一點就可以匯出 <br>
 來，不用花很多時間維護 word、excel 檔案了 :D <br>
 <br>
 <br>
-程式說明：http://3wa.tw 資料庫匯出機 <br>
+程式說明：http://3wa.tw 資料庫資料結構匯出機 <br>
 作者：羽山秋人 <br>                      
 版本：V1.0 <br>
 版權：GPL & MIT 喜歡就拿去用吧 <br>
@@ -34,4 +34,4 @@
 <br>
 <img src='http://3wa.tw/photo/small.php?w_size=900&compassion=85&file_name=users/shadow/20150414_161846_1.png'>
 <br>
-<b>可以匯出資料結構～讚啦</b>
+<b>可以匯出資料結構～讚啦，接下來就可以複製到 Word 作成文件了～</b>
