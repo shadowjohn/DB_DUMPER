@@ -297,8 +297,25 @@ $tns = "
             $pdo = new PDO("{$DB_KIND}:{$C}",$POSTS['DB_ID'],$POSTS['DB_PWD']);
             $SQL=sprintf("USE [%s]",$POSTS['DB_SELECT']);
             selectSQL($SQL);    
-            $SQL="SELECT [name] as [Name],[name] as [Comment] FROM [sys].[tables]";
-            $ra = selectSQL($SQL);                                             
+            $SQL="SELECT [name] as [Name] FROM [sys].[tables]";
+            $ra = selectSQL($SQL);    
+            $SQL=sprintf("SELECT [objname] as [name],cast(value as varchar(255)) as [des] FROM fn_listextendedproperty(NULL,'user','dbo','table',default,default,default) ");    
+            $ro_tables_des=selectSQL($SQL);            
+            //print_r($ro_tables_des);
+            for($i=0;$i<count($ra);$i++)
+            {
+              $ra[$i]['Comment']="";
+              for($j=0;$j<count($ro_tables_des);$j++)
+              {
+                if($ra[$i]['Name']==$ro_tables_des[$j]['name'])
+                {
+                  $ra[$i]['Comment']=$ro_tables_des[$j]['des'];
+                  break;          
+                }
+              }
+            }
+            
+                                                     
             for($i=0,$max_i=count($ra);$i<$max_i;$i++)
             {              
               $d = ARRAY();
@@ -402,6 +419,7 @@ $tns = "
               $ra = selectSQL($SQL);            
               $d = ARRAY();
               $data_base_tmp_data="";
+              ob_start();
               for($i=0,$max_i=count($POSTS['selectAll']);$i<$max_i;$i++)
               {    
                 $SQL=sprintf("show table status from `%s` where name= ? ",$POSTS['DB_SELECT']);
@@ -410,7 +428,7 @@ $tns = "
                 $res_explain_object=selectSQL($SQL);           
                 if(count($res_object)!=0)
                 {
-                  ob_start();
+                  
                   echo $res_object[0]['Name']."　　".$res_object[0]['Comment'];              
                   ?>
                   <br>
@@ -441,10 +459,12 @@ $tns = "
                   </table>
                   <br>
                   <?         
-                  $data_base_tmp_data.=ob_get_contents();
+                  
                 }              
-                ob_end_clean();
+                
               }
+              $data_base_tmp_data=ob_get_contents();
+              ob_end_clean();
               echo $data_base_tmp_data;
               exit();                                   
             break;
@@ -452,11 +472,31 @@ $tns = "
             $pdo = new PDO("{$DB_KIND}:{$C}",$POSTS['DB_ID'],$POSTS['DB_PWD']);
             $data_base_tmp_data="";
             $SQL="USE [{$POSTS['DB_SELECT']}]";
-            selectSQL($SQL); 
+            selectSQL($SQL);
+            
+            $SQL=sprintf("SELECT [name] FROM [sys].[tables]");
+            $ro_tables=selectSQL($SQL);
+            $SQL=sprintf("SELECT [objname] as [name],cast(value as varchar(255)) as [des] FROM fn_listextendedproperty(NULL,'user','dbo','table',default,default,default) ");    
+            $ro_tables_des=selectSQL($SQL);            
+            //print_r($ro_tables_des);
+            for($i=0;$i<count($ro_tables);$i++)
+            {
+              $ro_tables[$i]['des']="";
+              for($j=0;$j<count($ro_tables_des);$j++)
+              {
+                if($ro_tables[$i]['name']==$ro_tables_des[$j]['name'])
+                {
+                  $ro_tables[$i]['des']=$ro_tables_des[$j]['des'];
+                  break;          
+                }
+              }
+            }
+             
             ob_start();  
             for($i=0,$max_i=count($POSTS['selectAll']);$i<$max_i;$i++)
             {         
-              $SQL=sprintf("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '%s' ",$POSTS['selectAll'][$i]);              
+              $SQL=sprintf("SELECT 
+                              * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '%s' ",$POSTS['selectAll'][$i]);              
               $ro=selectSQL($SQL);
               $SQL=sprintf("SELECT objname as name,CAST(value as varchar(255)) as [des] FROM fn_listextendedproperty(NULL,'user','dbo','table','%s','column',default)",$POSTS['selectAll'][$i]);
               $ro_des=selectSQL($SQL);
@@ -474,6 +514,8 @@ $tns = "
                 }
               }
               $des="";
+              
+              
               for($j=0,$max_j=count($ro_tables);$j<$max_j;$j++)
               {
                 if($ro_tables[$j]['name']==$POSTS['selectAll'][$i])
@@ -491,7 +533,7 @@ $tns = "
               }
               $others="";                                
               ?>             
-                <?=$POSTS['select_table'][$i];?>　<?=$des;?>
+                <?=$POSTS['selectAll'][$i];?>　<?=$des;?>
                 <br>
                 <table border="1" cellpadding="5" cellspacing="0" width="90%">
                   <tr>
