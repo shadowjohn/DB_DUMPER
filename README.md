@@ -30,7 +30,7 @@
 <br>
 <img src='http://3wa.tw/photo/small.php?w_size=900&compassion=85&file_name=users/shadow/20150414_161846_0.png'>
 <br>
-<b>使用者可以自己設定主機的連線（當然資料庫要予許連才行）</b>
+<b>使用者可以自己設定主機的連線（當然資料庫要允許連才行）</b>
 <br>
 <img src='http://3wa.tw/photo/small.php?w_size=900&compassion=85&file_name=users/shadow/20150414_161846_1.png'>
 <br>
