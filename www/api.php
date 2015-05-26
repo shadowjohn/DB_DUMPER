@@ -48,7 +48,7 @@
             break;
           case 'sqlite':
             ?>
-            檔案位置：<input type="file" id="db_place"><br>
+            檔案位置：<span id="db_place_span"></span><input type="file" id="db_place"><br>
             <?php
             break;
         }        
@@ -85,7 +85,7 @@
         $DB_KIND = "";
         $C = "";
         $tns="";
-        switch($POSTS['DB_KIND'])
+        switch(strtolower($POSTS['DB_KIND']))
         {
           case 'mysql':            
             $DB_KIND = "mysql";
@@ -111,6 +111,9 @@ $tns = "
 ";          
             $DB_KIND = "oci:dbname={$tns}";
             break; 
+          case 'sqlite':
+            $DB_KIND = "sqlite:{$POSTS['DB_PLACE']}";
+            break;
         }
         switch($POSTS['DB_KIND'])
         {
@@ -137,8 +140,10 @@ $tns = "
           case 'sqlite':
             try{
               $pdo = new PDO("sqlite:{$POSTS['DB_PLACE']}");
-              $OUTPUT['STATUS']="TRUE";
-            }catch(PDOException $Exception){
+              $pdo->setAttribute(PDO::ATTR_ERRMODE, 
+                            PDO::ERRMODE_EXCEPTION);              
+              $OUTPUT['STATUS']="TRUE";              
+            }catch(Exception $Exception){
               $OUTPUT['STATUS']="FALSE";
               $OUTPUT['REASON']=print_r($Exception,true);                
             } 
@@ -229,12 +234,14 @@ $tns = "
               $d = ARRAY();         
               $d['DB_NAME'] = $ra[$i]['NAME'];
               array_push($OUTPUT,$d);
-            }  
-            $d = ARRAY();            
+            }                       
             array_push($OUTPUT,$d);      
             break;
           case 'sqlite':
             $pdo = new PDO("sqlite:{$POSTS['DB_PLACE']}");
+            $d = ARRAY();         
+            $d['DB_NAME'] = mainname($POSTS['DB_PLACE']);
+            array_push($OUTPUT,$d);  
             break;
         }
         echo json_encode($OUTPUT,true);
@@ -367,6 +374,24 @@ $tns = "
             break;
           case 'sqlite':
             $pdo = new PDO("sqlite:{$POSTS['DB_PLACE']}");
+            $SQL= sprintf("
+              SELECT 
+                name AS TABLE_NAME,
+                name AS TABLE_COMMENT
+              FROM sqlite_master
+              WHERE 
+                1=1
+                AND type='table'
+                AND name!='sqlite_sequence'
+            ");
+            $ra = selectSQL($SQL);                                             
+            for($i=0,$max_i=count($ra);$i<$max_i;$i++)
+            {              
+              $d = ARRAY();
+              $d['TABLE_NAME'] = $ra[$i]['TABLE_NAME'];
+              $d['TABLE_COMMENT'] = $ra[$i]['TABLE_COMMENT'];
+              array_push($OUTPUT,$d);
+            }   
             break;
         }
         echo json_encode($OUTPUT,true);
@@ -447,7 +472,7 @@ $tns = "
                     <td><?=$res_explain_object[$j]['Field'];?></td>
                     <td><?=$res_explain_object[$j]['Comment'];?></td>
                     <td><?=$res_explain_object[$j]['Type'];?></td>                
-                    <td><?=(trim($res_explain_object[$j]['Key'])=="")?"":"Key：{$res_explain_object[$j]['Key']}";?>
+                    <td style="text-align:left;"><?=(trim($res_explain_object[$j]['Key'])=="")?"":"Key：{$res_explain_object[$j]['Key']}";?>
                         <?=(trim($res_explain_object[$j]['Default'])=="")?"":"<br>Default：{$res_explain_object[$j]['Default']}";?>                    
                         <?=(trim($res_explain_object[$j]['Extra'])=="")?"":"<br>Extra：{$res_explain_object[$j]['Extra']}";?>
                         &nbsp;
@@ -577,7 +602,7 @@ $tns = "
                         }
                         ?>
                       &nbsp;</td>
-                      <td>
+                      <td style="text-align:left;">
                          <?=$others;?>
                       &nbsp;</td>
                     </tr>
@@ -652,7 +677,7 @@ $tns = "
                     <td><?=$res_explain_object[$j]['Field'];?></td>
                     <td><?=$res_explain_object[$j]['Comment'];?></td>
                     <td><?=$res_explain_object[$j]['Type'];?></td>                
-                    <td><?=(trim($res_explain_object[$j]['Key'])=="")?"":"Key：{$res_explain_object[$j]['Key']}";?>
+                    <td style="text-align:left;"><?=(trim($res_explain_object[$j]['Key'])=="")?"":"Key：{$res_explain_object[$j]['Key']}";?>
                         <?=(trim($res_explain_object[$j]['Default'])=="")?"":"<br>Default：{$res_explain_object[$j]['Default']}";?>                    
                         <?=(trim($res_explain_object[$j]['Extra'])=="")?"":"<br>Extra：{$res_explain_object[$j]['Extra']}";?>
                         &nbsp;
@@ -777,7 +802,7 @@ $tns = "
                     <td><?=$res_explain_object[$j]['Field'];?></td>
                     <td><?=$res_explain_object[$j]['Comment'];?></td>
                     <td><?=$res_explain_object[$j]['Type'];?></td>                
-                    <td><?=(trim($res_explain_object[$j]['Key'])=="")?"":"Key：{$res_explain_object[$j]['Key']}";?>
+                    <td style="text-align:left;"><?=(trim($res_explain_object[$j]['Key'])=="")?"":"Key：{$res_explain_object[$j]['Key']}";?>
                         <?=(trim($res_explain_object[$j]['Default'])=="")?"":"<br>Default：{$res_explain_object[$j]['Default']}";?>                    
                         <?=(trim($res_explain_object[$j]['Extra'])=="")?"":"<br>Extra：{$res_explain_object[$j]['Extra']}";?>
                         &nbsp;
@@ -801,6 +826,69 @@ $tns = "
             break;
           case 'sqlite':
             $pdo = new PDO("sqlite:{$POSTS['DB_PLACE']}");
+            $data_base_tmp_data="";
+            
+            ob_start(); 
+             
+            for($i=0,$max_i=count($POSTS['selectAll']);$i<$max_i;$i++)
+            { 
+              $SQL=sprintf("PRAGMA table_info(%s);",$POSTS['selectAll'][$i]);
+              $res_object = selectSQL($SQL);
+              $SQL=sprintf("
+              SELECT COUNT(*) AS COUNTER                 
+              FROM sqlite_master
+              WHERE 
+                1=1
+                AND type='table'
+                AND name='sqlite_sequence'
+              ");
+              $ra_count_sqlite_sequence = selectSQL($SQL);
+              $res_explain_object=ARRAY();
+              if($ra_count_sqlite_sequence[0]['COUNTER']>=1)
+              {
+                $SQL=sprintf("SELECT * FROM sqlite_sequence WHERE name='%s'",$POSTS['selectAll'][$i]);
+                $res_explain_object = selectSQL($SQL);
+              }
+              if(count($res_object)!=0)
+              {                
+                echo $POSTS['selectAll'][$i];              
+                ?>
+                <br>
+                <table border="1" cellpadding="5" cellspacing="0" width="90%">
+                <tr>
+                  <th width="20%">欄位名稱(英)</th>
+                  <th width="20%">欄位名稱(中)</th>
+                  <th width="20%">型態</th>
+                  <th>相關參數</th>
+                </tr>
+                <?
+                for($j=0,$max_j=count($res_object);$j<$max_j;$j++)
+                { 
+                ?>
+                <tr>
+                  <td><?=$res_object[$j]['name'];?></td>
+                  <td><?=$res_object[$j]['name'];?></td>
+                  <td><?=$res_object[$j]['type'];?></td>
+                  <td style="text-align:left;"><?=(trim($res_object[$j]['pk'])=="0")?"":"Key：{$res_object[$j]['name']}";?>
+                        <?=(trim($res_object[$j]['dflt_value'])=="")?"":"<br>Default：{$res_object[$j]['dflt_value']}";?>
+                        <?php
+                        if(count($res_explain_object)!=0 && $res_object[$j]['pk']=='1'){
+                          echo "<br>Extra：auto_increment";
+                        }
+                        ?>
+                        &nbsp;</td>
+                </tr>
+                <?php
+                }
+                ?>
+                </table>
+                <?php
+              }                           
+            }
+            $data_base_tmp_data=ob_get_contents();
+            ob_end_clean(); 
+            echo $data_base_tmp_data;
+            exit();                             
             break;
         }
       exit();

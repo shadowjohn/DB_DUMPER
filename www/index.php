@@ -5,7 +5,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-  <title>羽山好棒棒 http://3wa.tw</title> 
+  <title>羽山好棒棒 http://3wa.tw 資料結構匯出機 - V1.1</title> 
   <link href="css/normalize.css" rel="stylesheet" type="text/css"> 
   <script src="inc/jquery-1.8.3.min.js" type="text/javascript"></script>  
   <script src="inc/php.default-min-min.js" type="text/javascript"></script>
@@ -85,10 +85,14 @@
             m['DB_SERVICENAME']=$("#db_servicename").val();
             break;
           case 'sqlite':
-            m['DB_PLACE']=$("#db_place").attr('src');
+            m['DB_PLACE']=$("#db_place").attr('src');                        
             break;
         }
         checkDBLink(m,true);
+      });
+      $("#db_place").unbind("change");
+      $("#db_place").change(function(){        
+        $(this).attr('src',$(this).val());
       });
       $("#db_save_btn").unbind("click");
       $("#db_save_btn").click(function(){
@@ -112,9 +116,10 @@
             m['DB_SERVICENAME']=$("#db_servicename").val();
             break;
           case 'sqlite':
-            m['DB_PLACE']=$("#db_place").val();
+            m['DB_PLACE']=$("#db_place").attr('src');            
             break;
         }        
+        
         var tmp = json_decode(myAjax("api.php?mode=saveDB_Setting",m),true);
         if(tmp['STATUS']=="TRUE")
         {
@@ -176,7 +181,7 @@
       m['DB_IP']=$("#db_ip").val();
       m['DB_ID']=$("#db_id").val();
       m['DB_PWD']=$("#db_pwd").val();
-      m['DB_PLACE']=$("#db_place").attr('src');
+      m['DB_PLACE']=$("#db_place").attr('src');  
       m['DB_SERVICENAME']=$("#db_servicename").val();
       return m;
     }
@@ -237,7 +242,10 @@
               $("#db_servicename").val(tmp['DB_SERVICENAME']);              
               break;
             case 'sqlite':
+              $("#db_title").val(tmp['DB_TITLE']);
+              $("#db_place").val(tmp['DB_PLACE']);
               $("#db_place").attr('src',tmp['DB_PLACE']);
+              $("#db_place_span").html(tmp['DB_PLACE']);
               break;
           }
           break;
