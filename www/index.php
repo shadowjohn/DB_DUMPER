@@ -5,7 +5,7 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-  <title>羽山好棒棒 http://3wa.tw 資料結構匯出機 - V1.1</title> 
+  <title>羽山好棒棒 http://3wa.tw 資料結構匯出機 - V1.2</title> 
   <link href="css/normalize.css" rel="stylesheet" type="text/css"> 
   <script src="inc/jquery-1.8.3.min.js" type="text/javascript"></script>  
   <script src="inc/php.default-min-min.js" type="text/javascript"></script>
@@ -232,7 +232,7 @@
               $("#db_title").val(tmp['DB_TITLE']);
               $("#db_ip").val(tmp['DB_IP']);
               $("#db_id").val(tmp['DB_ID']);
-              $("#db_pwd").val(tmp['DB_PWD']);
+              $("#db_pwd").val(tmp['DB_PWD']);              
               break;
             case 'oracle':
               $("#db_title").val(tmp['DB_TITLE']);

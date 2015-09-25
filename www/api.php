@@ -121,7 +121,7 @@ $tns = "
           case 'mssql':
           case 'postgresql':
             try{
-              $pdo = new PDO("{$DB_KIND}:{$C}",$POSTS['DB_ID'],$POSTS['DB_PWD']);
+              $pdo = new PDO("{$DB_KIND}:dbname=postgres;{$C}",$POSTS['DB_ID'],$POSTS['DB_PWD']);
               $OUTPUT['STATUS']="TRUE";
             }catch(PDOException $Exception){              
               $OUTPUT['STATUS']="FALSE";
@@ -215,9 +215,9 @@ $tns = "
             break;
           case 'postgresql':
             
-            $pdo = new PDO("{$DB_KIND}:{$C}",$POSTS['DB_ID'],$POSTS['DB_PWD']);
+            $pdo = new PDO("{$DB_KIND}:dbname=postgres;{$C}",$POSTS['DB_ID'],$POSTS['DB_PWD']);
             $SQL="SELECT datname FROM pg_database";            
-            $ra = selectSQL($SQL);                              
+            $ra = selectSQL($SQL);                                          
             for($i=0,$max_i=count($ra);$i<$max_i;$i++)
             {         
               $d = ARRAY();         

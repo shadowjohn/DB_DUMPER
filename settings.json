@@ -8,7 +8,7 @@
         "log_file": "debug.log"
     },
     "main_window": {
-        "title": "http://3wa.tw 資料結構匯出機　V1.1",
+        "title": "http://3wa.tw 資料結構匯出機　V1.2",
         "icon": "",
         "default_size": [1024, 700],
         "minimum_size": [800, 600],
