@@ -121,7 +121,7 @@ $tns = "
           case 'mssql':
           case 'postgresql':
             try{
-              $pdo = new PDO("{$DB_KIND}:dbname=postgres;{$C}",$POSTS['DB_ID'],$POSTS['DB_PWD']);
+              $pdo = new PDO("{$DB_KIND}:dbname={$POSTS['DB_KIND']};{$C}",$POSTS['DB_ID'],$POSTS['DB_PWD']);
               $OUTPUT['STATUS']="TRUE";
             }catch(PDOException $Exception){              
               $OUTPUT['STATUS']="FALSE";
