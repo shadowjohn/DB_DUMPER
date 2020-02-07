@@ -29,10 +29,10 @@
 <br>
 截圖：<br>
 <br>
-<img src='http://3wa.tw/photo/small.php?w_size=900&compassion=85&file_name=users/shadow/20150414_161846_0.png'>
+<img src='snapshots/snapshots1.png'>
 <br>
 <b>使用者可以自己設定主機的連線（當然資料庫要允許連才行）</b>
 <br>
-<img src='http://3wa.tw/photo/small.php?w_size=900&compassion=85&file_name=users/shadow/20150414_161846_1.png'>
+<img src='snapshots/snapshots2.png'>
 <br>
 <b>可以匯出資料結構～讚啦，接下來就可以複製到 Word 作成文件了～</b>
