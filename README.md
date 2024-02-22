@@ -4,7 +4,7 @@
 來，不用花很多時間維護 word、excel 檔案了 :D <br>
 <br>
 <br>
-程式說明：http://3wa.tw 資料庫資料結構匯出機 <br>
+程式說明：https://3wa.tw 資料庫資料結構匯出機 <br>
 作者：羽山秋人 <br>                      
 版本：V1.3 <br>
 版權：GPL & MIT 喜歡就拿去用吧 <br>
