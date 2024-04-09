@@ -1,11 +1,11 @@
-<?php
+<?php  
   require 'inc/config.php';  
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-  <title>羽山好棒棒 http://3wa.tw 資料結構匯出機 - V1.3</title> 
+  <title>羽山好棒棒 https://3wa.tw 資料結構匯出機 - V1.3</title> 
   <link href="css/normalize.css" rel="stylesheet" type="text/css"> 
   <script src="inc/jquery-1.8.3.min.js" type="text/javascript"></script>  
   <script src="inc/php.default-min-min.js" type="text/javascript"></script>

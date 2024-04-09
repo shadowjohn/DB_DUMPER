@@ -1,4 +1,5 @@
 <?php
+  error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
   require 'include.php';
   @mkdir("C:\\temp",0777);
   $DB_PATH = "C:\\temp\\db.data";
